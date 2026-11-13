@@ -105,7 +105,7 @@ const TITLE = 'Osteopathy with Kam · Lotus Wellbeing';
 
 const app = document.getElementById('app');
 const adminKey = new URLSearchParams(location.search).get('k');
-let taken = new Set(), picked = null, timer = null;
+let taken = new Set(), picked = null, timer = null, notice = '';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const start = s => new Date(`${DATE}T${s}:00${OFFSET}`);
@@ -173,11 +173,12 @@ function renderBooking() {
       <button class="btn" id="b" type="submit">Confirm booking</button>
       <div class="err" id="err"></div></form>` : '');
   Object.entries(keep).forEach(([id,v]) => { const el = document.getElementById(id); if (el) el.value = v; });
+  const errEl = document.getElementById('err'); if (errEl && notice) errEl.textContent = notice;
   app.querySelectorAll('.slot').forEach(b => b.onclick = () => {
     picked = b.dataset.s;
     app.querySelectorAll('.slot').forEach(x => x.classList.toggle('sel', x === b));
     const sum = document.getElementById('sum'); if (sum) sum.innerHTML = `Booking <b>${picked} – ${hhmm(endOf(picked))}</b>`;
-    document.getElementById('err').textContent = '';
+    notice = ''; document.getElementById('err').textContent = '';
   });
   const f = document.getElementById('f'); if (f) f.onsubmit = submit;
 }
@@ -193,7 +194,7 @@ async function submit(ev) {
     const res = await rpc('lotus_book', {p_slot:picked, p_name:name});
     if (res.ok) return renderDone(res.slot, res.name);
     err.textContent = res.msg; btn.disabled = false; btn.textContent = 'Confirm booking';
-    if (res.refresh) { picked = null; loadTaken(); }
+    if (res.refresh) { notice = res.msg; picked = null; loadTaken(); }
   } catch(e) { err.textContent = 'Something went wrong. Please try again.'; btn.disabled = false; btn.textContent = 'Confirm booking'; }
 }
 
