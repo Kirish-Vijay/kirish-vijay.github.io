@@ -156,7 +156,7 @@ async function loadTaken() {
 function renderBooking() {
   if (app.dataset.done) return;
   const keep = {};
-  ['n','p','e','h'].forEach(id => { const el = document.getElementById(id); if (el) keep[id] = el.value; });
+  ['n'].forEach(id => { const el = document.getElementById(id); if (el) keep[id] = el.value; });
   const avail = SLOTS.filter(s => !taken.has(s) && !isPast(s));
   if (picked && !avail.includes(picked)) picked = null;
   app.innerHTML = dayHeader(`5:00 – 9:00pm · ${WHERE}`) +
@@ -167,12 +167,8 @@ function renderBooking() {
         return `<button type="button" class="slot${s===picked?' sel':''}" data-s="${s}" ${free?'':'disabled'}>${s}<small>${free ? 'to '+hhmm(endOf(s)) : (taken.has(s)?'Booked':'Passed')}</small></button>`;
       }).join('')}</div></div>` +
     (avail.length ? `<form class="section form" id="f" novalidate>
-      <p class="label">Your details</p>
-      <div class="field"><label for="n">Full name</label><input id="n" autocomplete="name" required maxlength="80"></div>
-      <div class="field"><label for="p">Phone <span>(optional)</span></label><input id="p" type="tel" autocomplete="tel" maxlength="40"></div>
-      <div class="field"><label for="e">Email <span>(optional)</span></label><input id="e" type="email" autocomplete="email" maxlength="120"></div>
-      <div class="field"><label for="h">Injuries or health conditions <span>(optional)</span></label><textarea id="h" maxlength="1000" placeholder="Anything ${WHO} should know before your session"></textarea>
-        <div class="private"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:2px"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private. Only ${WHO} sees this. Other people only see that a slot is booked.</div></div>
+      <p class="label"><label for="n">Your name</label></p>
+      <div class="field"><input id="n" autocomplete="name" required maxlength="80" placeholder="Full name"></div>
       <p class="sumline" id="sum">${picked ? `Booking <b>${picked} – ${hhmm(endOf(picked))}</b>` : 'Pick a time above'}</p>
       <button class="btn" id="b" type="submit">Confirm booking</button>
       <div class="err" id="err"></div></form>` : '');
@@ -190,13 +186,11 @@ async function submit(ev) {
   ev.preventDefault();
   const err = document.getElementById('err'), btn = document.getElementById('b');
   const name = document.getElementById('n').value.trim();
-  const email = document.getElementById('e').value.trim();
   if (!picked) { err.textContent = 'Pick a time first.'; return; }
   if (!name) { err.textContent = 'Please add your name.'; document.getElementById('n').focus(); return; }
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'That email looks off.'; return; }
   btn.disabled = true; btn.textContent = 'Booking…'; err.textContent = '';
   try {
-    const res = await rpc('lotus_book', {p_slot:picked, p_name:name, p_phone:document.getElementById('p').value, p_email:email, p_notes:document.getElementById('h').value});
+    const res = await rpc('lotus_book', {p_slot:picked, p_name:name});
     if (res.ok) return renderDone(res.slot, res.name);
     err.textContent = res.msg; btn.disabled = false; btn.textContent = 'Confirm booking';
     if (res.refresh) { picked = null; loadTaken(); }
@@ -230,7 +224,7 @@ function renderAdmin(rows) {
     const r = by[s];
     if (!r) return `<div class="row free"><div class="t">${s}</div><div class="who">Free</div></div>`;
     const lines = [r.phone && '📞 '+esc(r.phone), r.email && '✉️ '+esc(r.email)].filter(Boolean).join('<br>');
-    const details = [`Client: ${r.name}`, r.phone && `Phone: ${r.phone}`, r.email && `Email: ${r.email}`, r.notes ? `Health notes: ${r.notes}` : 'No health notes given.'].filter(Boolean).join('\n');
+    const details = [`Client: ${r.name}`, r.phone && `Phone: ${r.phone}`, r.email && `Email: ${r.email}`, r.notes && `Notes: ${r.notes}`].filter(Boolean).join('\n');
     return `<div class="row"><div class="t">${s}</div><div class="who"><b>${esc(r.name)}</b>${lines?`<div>${lines}</div>`:''}${r.notes?`<div class="n">${esc(r.notes)}</div>`:''}</div>
       <div class="act"><a href="${gcalLink(s, details, 'Osteo: '+r.name)}" target="_blank" rel="noopener">+ Calendar</a>
       <button data-c="${s}">Free up</button><button class="confirm" data-y="${s}">Sure?</button></div></div>`;
