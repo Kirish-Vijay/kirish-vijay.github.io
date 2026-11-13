@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Book a session · Lotus Wellbeing</title>
+<meta property="og:title" content="Book your osteopathy session · Lotus Wellbeing">
+<meta property="og:description" content="30-minute one-to-one sessions with Kam, tonight 5–9pm. First come, first served.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 12c6 7 6 19 0 28-6-9-6-21 0-28z' fill='%23b5677d'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f5efe9; --card:#fffdfb; --ink:#2b2624; --muted:#80756e; --soft:#a89c94;
+    --rose:#b1617a; --rose-d:#8f4a62; --rose-l:#f6e7ec; --sage:#6a8b76; --line:#ebe1d9;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:520px;margin:0 auto;padding:32px 18px 56px}
+  header{text-align:center;margin-bottom:22px}
+  .lotus{width:46px;height:46px;display:block;margin:0 auto 8px}
+  .brand{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:36px;letter-spacing:.2px;margin:0;line-height:1.1}
+  .tag{color:var(--muted);margin:6px 0 0;font-size:15px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(70,40,30,.07);overflow:hidden}
+  .day{display:flex;align-items:center;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
+  .cal{width:58px;flex:none;border-radius:12px;overflow:hidden;border:1px solid var(--line);text-align:center;background:#fff}
+  .cal .m{background:var(--rose);color:#fff;font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;padding:3px 0}
+  .cal .d{font-size:24px;font-weight:600;padding:2px 0 4px}
+  .day h2{margin:0;font-size:17px;font-weight:600}
+  .day p{margin:2px 0 0;color:var(--muted);font-size:14px}
+  .section{padding:20px}
+  .label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 12px;display:flex;justify-content:space-between}
+  .label em{font-style:normal;text-transform:none;letter-spacing:0;color:var(--sage);font-weight:500}
+  .slots{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .slot{appearance:none;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 8px;font:inherit;font-weight:600;font-size:16px;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s,transform .05s}
+  .slot small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:1px}
+  .slot:hover:not(:disabled){border-color:var(--rose)}
+  .slot:active:not(:disabled){transform:scale(.98)}
+  .slot.sel{background:var(--rose);border-color:var(--rose);color:#fff}
+  .slot.sel small{color:#fbe6ed}
+  .slot:disabled{background:#f3eee9;border-color:#f3eee9;color:var(--soft);cursor:not-allowed}
+  .slot:disabled small{color:var(--soft)}
+  .form{border-top:1px solid var(--line)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-weight:500;font-size:14px;margin-bottom:6px}
+  .field label span{font-weight:400;color:var(--muted)}
+  input,textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:12px 13px;font:inherit;background:#fff;color:var(--ink)}
+  input:focus,textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px var(--rose-l)}
+  textarea{min-height:88px;resize:vertical}
+  .private{font-size:12.5px;color:var(--muted);margin-top:6px;display:flex;gap:6px;align-items:flex-start}
+  .btn{display:block;width:100%;border:0;border-radius:13px;padding:15px;background:var(--rose);color:#fff;font:inherit;font-weight:600;font-size:17px;cursor:pointer;transition:background .15s;text-align:center;text-decoration:none}
+  .btn:hover{background:var(--rose-d)}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn.ghost{background:#fff;color:var(--rose-d);border:1.5px solid var(--line);font-size:15px;padding:12px}
+  .btn.ghost:hover{border-color:var(--rose)}
+  .sumline{font-size:14px;color:var(--muted);text-align:center;margin:0 0 12px;min-height:1.2em}
+  .sumline b{color:var(--ink)}
+  .err{color:#a33a3a;font-size:14px;margin-top:12px;text-align:center;min-height:1em}
+  .done{text-align:center;padding:30px 22px 26px}
+  .tick{width:62px;height:62px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+  .done h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;margin:0 0 4px;font-weight:600}
+  .done .when{font-weight:600;font-size:17px;margin:0}
+  .done .where{color:var(--muted);margin:2px 0 20px}
+  .done .btn+.btn{margin-top:10px}
+  .loading{padding:34px 0;text-align:center;color:var(--muted)}
+  .full{text-align:center;padding:4px 0 16px;color:var(--muted)}
+  footer{text-align:center;color:var(--muted);font-size:13.5px;margin-top:20px;line-height:1.6}
+  /* admin */
+  .row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .row:last-child{border-bottom:0}
+  .row .t{font-weight:600;width:52px;flex:none}
+  .row .who{flex:1;min-width:0}
+  .row .who b{display:block}
+  .row .who div{font-size:13.5px;color:var(--muted);word-break:break-word}
+  .row .who .n{color:var(--ink);background:var(--rose-l);border-radius:8px;padding:6px 9px;margin-top:6px;white-space:pre-wrap}
+  .row .act{display:flex;flex-direction:column;gap:6px;flex:none}
+  .row .act a,.row .act button{font:inherit;font-size:12.5px;font-weight:600;color:var(--rose-d);background:none;border:1px solid var(--line);border-radius:8px;padding:5px 8px;cursor:pointer;text-decoration:none;text-align:center}
+  .row.free .who{color:var(--soft)}
+  .confirm{display:none;font-size:12.5px}
+  @media (max-width:360px){.slots{grid-template-columns:1fr 1fr}.brand{font-size:31px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg class="lotus" viewBox="0 0 64 64" fill="none" stroke="#b1617a" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+      <path d="M32 12c6 7 6 19 0 28-6-9-6-21 0-28z"/><path d="M32 40c-4-8-12-14-22-14 1 10 9 16 22 14z"/>
+      <path d="M32 40c4-8 12-14 22-14-1 10-9 16-22 14z"/><path d="M14 46c6 3 30 3 36 0" stroke="#6a8b76"/></svg>
+    <h1 class="brand">Lotus Wellbeing</h1>
+    <p class="tag" id="tag">One-to-one osteopathy with Kam</p>
+  </header>
+  <div class="card" id="app"><div class="loading">Loading available times…</div></div>
+  <footer id="foot">Please wear comfortable clothing.<br>30-minute sessions · first come, first served</footer>
+</div>
+
+<script>
+const SB_URL = 'https://nfsogyreyownlchwdnff.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5mc29neXJleW93bmxjaHdkbmZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2OTMwMTksImV4cCI6MjEwODI2OTAxOX0.wSuRLzIJsky05XlvtIdZBGFSB7K9WJBWKA3kJLcO7Zk';
+const DATE = '2026-11-13', OFFSET = '+01:00'; // Europe/Madrid in November
+const SLOTS = ['17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30'];
+const MINS = 30, WHO = 'Kam', WHERE = 'The Identity Shift';
+const TITLE = 'Osteopathy with Kam · Lotus Wellbeing';
+
+const app = document.getElementById('app');
+const adminKey = new URLSearchParams(location.search).get('k');
+let taken = new Set(), picked = null, timer = null;
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const start = s => new Date(`${DATE}T${s}:00${OFFSET}`);
+const endOf = s => new Date(start(s).getTime() + MINS*60000);
+const hhmm = d => d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'});
+const dayLabel = start(SLOTS[0]).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',timeZone:'Europe/Madrid'});
+const isPast = s => start(s) <= new Date();
+
+async function rpc(fn, body = {}) {
+  const r = await fetch(`${SB_URL}/rest/v1/rpc/${fn}`, {
+    method:'POST',
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error((await r.text()) || r.status);
+  return r.json();
+}
+
+function gcalLink(slot, details, title) {
+  const f = d => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const p = new URLSearchParams({action:'TEMPLATE', text:title||TITLE, dates:`${f(start(slot))}/${f(endOf(slot))}`, location:WHERE, details:details||'Please wear comfortable clothing.'});
+  return 'https://calendar.google.com/calendar/render?' + p.toString();
+}
+function icsLink(slot, summary, desc) {
+  const f = d => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Lotus Wellbeing//EN','BEGIN:VEVENT',
+    'UID:lotus-'+DATE+'-'+slot.replace(':','')+'@lotus','DTSTAMP:'+f(new Date()),
+    'DTSTART:'+f(start(slot)),'DTEND:'+f(endOf(slot)),'SUMMARY:'+summary,'LOCATION:'+WHERE,
+    'DESCRIPTION:'+(desc||'Please wear comfortable clothing.').replace(/\n/g,'\\n'),
+    'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+}
+const calIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-3px;margin-right:6px"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+
+function dayHeader(sub) {
+  const d = start(SLOTS[0]);
+  return `<div class="day"><div class="cal"><div class="m">${d.toLocaleDateString('en-GB',{month:'short',timeZone:'Europe/Madrid'})}</div><div class="d">${d.toLocaleDateString('en-GB',{day:'numeric',timeZone:'Europe/Madrid'})}</div></div>
+    <div><h2>${esc(dayLabel)}</h2><p>${esc(sub)}</p></div></div>`;
+}
+
+/* ---------- Booking view ---------- */
+async function loadTaken() {
+  try { taken = new Set((await rpc('lotus_taken')).map(r => r.slot)); renderBooking(); }
+  catch(e) { if (!app.querySelector('.slots')) app.innerHTML = '<div class="loading">Couldn’t load times. Pull to refresh.</div>'; }
+}
+
+function renderBooking() {
+  if (app.dataset.done) return;
+  const keep = {};
+  ['n','p','e','h'].forEach(id => { const el = document.getElementById(id); if (el) keep[id] = el.value; });
+  const avail = SLOTS.filter(s => !taken.has(s) && !isPast(s));
+  if (picked && !avail.includes(picked)) picked = null;
+  app.innerHTML = dayHeader(`5:00 – 9:00pm · ${WHERE}`) +
+    `<div class="section"><p class="label">Choose a time ${avail.length ? `<em>${avail.length} of ${SLOTS.length} left</em>` : ''}</p>
+     ${avail.length ? '' : '<div class="full">All sessions are booked. Thank you!</div>'}
+     <div class="slots">${SLOTS.map(s => {
+        const free = avail.includes(s);
+        return `<button type="button" class="slot${s===picked?' sel':''}" data-s="${s}" ${free?'':'disabled'}>${s}<small>${free ? 'to '+hhmm(endOf(s)) : (taken.has(s)?'Booked':'Passed')}</small></button>`;
+      }).join('')}</div></div>` +
+    (avail.length ? `<form class="section form" id="f" novalidate>
+      <p class="label">Your details</p>
+      <div class="field"><label for="n">Full name</label><input id="n" autocomplete="name" required maxlength="80"></div>
+      <div class="field"><label for="p">Phone <span>(optional)</span></label><input id="p" type="tel" autocomplete="tel" maxlength="40"></div>
+      <div class="field"><label for="e">Email <span>(optional)</span></label><input id="e" type="email" autocomplete="email" maxlength="120"></div>
+      <div class="field"><label for="h">Injuries or health conditions <span>(optional)</span></label><textarea id="h" maxlength="1000" placeholder="Anything ${WHO} should know before your session"></textarea>
+        <div class="private"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:2px"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private. Only ${WHO} sees this. Other people only see that a slot is booked.</div></div>
+      <p class="sumline" id="sum">${picked ? `Booking <b>${picked} – ${hhmm(endOf(picked))}</b>` : 'Pick a time above'}</p>
+      <button class="btn" id="b" type="submit">Confirm booking</button>
+      <div class="err" id="err"></div></form>` : '');
+  Object.entries(keep).forEach(([id,v]) => { const el = document.getElementById(id); if (el) el.value = v; });
+  app.querySelectorAll('.slot').forEach(b => b.onclick = () => {
+    picked = b.dataset.s;
+    app.querySelectorAll('.slot').forEach(x => x.classList.toggle('sel', x === b));
+    const sum = document.getElementById('sum'); if (sum) sum.innerHTML = `Booking <b>${picked} – ${hhmm(endOf(picked))}</b>`;
+    document.getElementById('err').textContent = '';
+  });
+  const f = document.getElementById('f'); if (f) f.onsubmit = submit;
+}
+
+async function submit(ev) {
+  ev.preventDefault();
+  const err = document.getElementById('err'), btn = document.getElementById('b');
+  const name = document.getElementById('n').value.trim();
+  const email = document.getElementById('e').value.trim();
+  if (!picked) { err.textContent = 'Pick a time first.'; return; }
+  if (!name) { err.textContent = 'Please add your name.'; document.getElementById('n').focus(); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'That email looks off.'; return; }
+  btn.disabled = true; btn.textContent = 'Booking…'; err.textContent = '';
+  try {
+    const res = await rpc('lotus_book', {p_slot:picked, p_name:name, p_phone:document.getElementById('p').value, p_email:email, p_notes:document.getElementById('h').value});
+    if (res.ok) return renderDone(res.slot, res.name);
+    err.textContent = res.msg; btn.disabled = false; btn.textContent = 'Confirm booking';
+    if (res.refresh) { picked = null; loadTaken(); }
+  } catch(e) { err.textContent = 'Something went wrong. Please try again.'; btn.disabled = false; btn.textContent = 'Confirm booking'; }
+}
+
+function renderDone(slot, name) {
+  app.dataset.done = '1'; clearInterval(timer);
+  const first = esc(String(name).split(' ')[0]);
+  app.innerHTML = `<div class="done">
+    <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2>You’re booked, ${first}</h2>
+    <p class="when">${esc(dayLabel)} · ${slot} – ${hhmm(endOf(slot))}</p>
+    <p class="where">with ${WHO} at ${WHERE}</p>
+    <a class="btn" href="${gcalLink(slot)}" target="_blank" rel="noopener">${calIcon}Add to Google Calendar</a>
+    <a class="btn ghost" href="${icsLink(slot, TITLE)}" download="lotus-session.ics">Add to Apple / Outlook calendar</a>
+    </div>`;
+  document.getElementById('foot').innerHTML = 'Please wear comfortable clothing.<br>Need to change your time? Message Kam in the group.';
+}
+
+/* ---------- Admin view (?k=...) ---------- */
+async function loadAdmin() {
+  try { renderAdmin(await rpc('lotus_admin', {p_key: adminKey})); }
+  catch(e) { app.innerHTML = '<div class="loading">This admin link isn’t valid.</div>'; clearInterval(timer); }
+}
+function renderAdmin(rows) {
+  const by = Object.fromEntries(rows.map(r => [r.slot, r]));
+  document.getElementById('tag').textContent = 'Bookings (private view)';
+  document.getElementById('foot').innerHTML = 'Updates automatically every 20 seconds.<br>Don’t share this link. The public booking link has no <b>?k=</b> on the end.';
+  app.innerHTML = dayHeader(`${rows.length} of ${SLOTS.length} booked`) + `<div class="section">${SLOTS.map(s => {
+    const r = by[s];
+    if (!r) return `<div class="row free"><div class="t">${s}</div><div class="who">Free</div></div>`;
+    const lines = [r.phone && '📞 '+esc(r.phone), r.email && '✉️ '+esc(r.email)].filter(Boolean).join('<br>');
+    const details = [`Client: ${r.name}`, r.phone && `Phone: ${r.phone}`, r.email && `Email: ${r.email}`, r.notes ? `Health notes: ${r.notes}` : 'No health notes given.'].filter(Boolean).join('\n');
+    return `<div class="row"><div class="t">${s}</div><div class="who"><b>${esc(r.name)}</b>${lines?`<div>${lines}</div>`:''}${r.notes?`<div class="n">${esc(r.notes)}</div>`:''}</div>
+      <div class="act"><a href="${gcalLink(s, details, 'Osteo: '+r.name)}" target="_blank" rel="noopener">+ Calendar</a>
+      <button data-c="${s}">Free up</button><button class="confirm" data-y="${s}">Sure?</button></div></div>`;
+  }).join('')}</div>`;
+  app.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { b.style.display='none'; app.querySelector(`[data-y="${b.dataset.c}"]`).style.display='block'; });
+  app.querySelectorAll('[data-y]').forEach(b => b.onclick = async () => { b.textContent='…'; await rpc('lotus_admin_cancel',{p_key:adminKey,p_slot:b.dataset.y}).catch(()=>{}); loadAdmin(); });
+}
+
+if (adminKey) { loadAdmin(); timer = setInterval(loadAdmin, 20000); }
+else { loadTaken(); timer = setInterval(() => { if (!document.querySelector('input:focus,textarea:focus')) loadTaken(); }, 20000); }
+</script>
+</body>
+</html>
